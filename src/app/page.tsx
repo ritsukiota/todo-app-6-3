@@ -29,10 +29,10 @@ export default function LoginPage() {
         console.log('ログイン:', { email, password });
         router.push('/todos');
       }
-    } catch (err: any) {
-      setError(err.message || 'Authentication failed');
-    } finally {
-      setIsLoading(false);
+    } catch (err: unknown) {
+      console.error('エラー:', err);
+      const errorMessage = err instanceof Error ? err.message : 'エラーが発生しました';
+      setError(errorMessage);
     }
   };
 
