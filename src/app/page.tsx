@@ -1,135 +1,71 @@
-'use client';
+import Link from 'next/link';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-
-export default function LoginPage() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSignUp, setIsSignUp] = useState(false);
-  const [error, setError] = useState('');
-  const router = useRouter();
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError('');
-
-    const formData = new FormData(e.currentTarget);
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
-    const name = formData.get('name') as string;
-
-    try {
-      if (isSignUp) {
-        // TODO: ユーザー登録機能を実装
-        console.log('新規登録:', { name, email, password });
-        router.push('/todos');
-      } else {
-        // TODO: ログイン機能を実装
-        console.log('ログイン:', { email, password });
-        router.push('/todos');
-      }
-    } catch (err: unknown) {
-      console.error('エラー:', err);
-      const errorMessage = err instanceof Error ? err.message : 'エラーが発生しました';
-      setError(errorMessage);
-    }
-  };
-
+export default function HomePage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="w-full max-w-md space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-            {isSignUp ? 'アカウント作成' : 'ログイン'}
-          </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            {isSignUp 
-              ? '新しいアカウントを作成してください' 
-              : 'メールアドレスとパスワードを入力してください'
-            }
-          </p>
-        </div>
-        
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="space-y-4">
-            {isSignUp && (
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                  名前
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
-                  placeholder="山田太郎"
-                />
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+      {/* 背景アニメーション */}
+      <div className="absolute inset-0 w-full h-full">
+        <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div className="absolute top-0 -right-4 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+      </div>
+
+      <div className="relative z-10 flex items-center justify-center min-h-screen px-4">
+        <div className="max-w-4xl mx-auto text-center space-y-8">
+          {/* メインタイトル */}
+          <div className="space-y-6">
+            <div className="inline-block">
+              <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse">
+                TODO
+              </h1>
+              <div className="text-2xl md:text-4xl font-light text-white/90 tracking-wider">
+                QUANTUM TASK MANAGER
               </div>
-            )}
-            
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                メールアドレス
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
-                placeholder="example@email.com"
-              />
             </div>
             
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                パスワード
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                required
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
-                placeholder="パスワードを入力"
-              />
+            <p className="text-xl md:text-2xl text-white/80 leading-relaxed max-w-2xl mx-auto">
+              次世代のタスク管理で
+              <span className="text-cyan-400 font-semibold"> 未来 </span>
+              を創造する
+            </p>
+          </div>
+
+          {/* 機能一覧 */}
+          <div className="grid md:grid-cols-3 gap-6 my-12">
+            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:scale-105">
+              <div className="text-4xl mb-4">⚡</div>
+              <h3 className="text-white font-semibold text-lg mb-2">LIGHTNING FAST</h3>
+              <p className="text-white/70 text-sm">瞬間的なタスク作成・編集</p>
+            </div>
+            
+            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:scale-105">
+              <div className="text-4xl mb-4">🎯</div>
+              <h3 className="text-white font-semibold text-lg mb-2">PRECISION CONTROL</h3>
+              <p className="text-white/70 text-sm">高精度なタスク管理システム</p>
+            </div>
+            
+            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:scale-105">
+              <div className="text-4xl mb-4">🚀</div>
+              <h3 className="text-white font-semibold text-lg mb-2">QUANTUM SYNC</h3>
+              <p className="text-white/70 text-sm">リアルタイム同期技術</p>
             </div>
           </div>
 
-          {error && (
-            <div className="text-sm text-red-600 bg-red-50 p-3 rounded-md">
-              {error}
-            </div>
-          )}
-
-          <div>
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="group relative flex w-full justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50"
+          {/* CTAボタン */}
+          <div className="space-y-6">
+            <Link 
+              href="/todos"
+              className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-black bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full hover:from-cyan-300 hover:to-purple-400 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-cyan-500/50"
             >
-              {isLoading ? '処理中...' : (isSignUp ? 'アカウント作成' : 'ログイン')}
-            </button>
+              <span className="mr-2">🚀</span>
+              QUANTUM LAUNCH
+            </Link>
+            
+            <p className="text-white/60 text-sm">
+              次世代体験への扉を開く
+            </p>
           </div>
-
-          <div className="text-center">
-            <button
-              type="button"
-              onClick={() => {
-                setIsSignUp(!isSignUp);
-                setError('');
-              }}
-              className="text-indigo-600 hover:text-indigo-500 text-sm font-medium"
-            >
-              {isSignUp 
-                ? '既にアカウントをお持ちの方はこちら' 
-                : 'アカウントをお持ちでない方はこちら'
-              }
-            </button>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   );
